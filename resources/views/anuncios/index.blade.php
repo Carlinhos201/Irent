@@ -11,7 +11,7 @@
 
 
         <form action="" style="position: fixed;margin-top: 150px;margin-left: 250px;color: white;">
-            <label for="">O que deseja?</label>
+            <label for="">O que ?</label>
             <input class="input-group" type="text">
         </form>
 
