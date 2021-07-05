@@ -16,7 +16,7 @@
 
         <nav class="navbar navbar-expand" style="background-color: currentcolor; margin-left: -405px;margin-right: -405px;">
             <a class="navbar-brand" href="#" style="color: white;
-            font-size: 30px;">Irent lklk</a>
+            font-size: 30px;">Irent lkoioilk</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
