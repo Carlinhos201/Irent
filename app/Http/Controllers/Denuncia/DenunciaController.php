@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Anuncios;
+namespace App\Http\Controllers\Denuncia;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AnunciosController extends Controller
+class DenunciaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class AnunciosController extends Controller
      */
     public function index()
     {
-        
-
-        return view('anuncios.anuncios');
+        //
     }
 
     /**

@@ -24,5 +24,6 @@ Route::prefix('anuncios')->group(function () {
         Route::get('/', [AnunciosController::class, 'index']);
 });
 
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function () {
+    return view('home.home');
+});

@@ -14,9 +14,9 @@
 
         
 
-        <nav class="navbar navbar-expand" style="background-color: currentcolor; margin-left: -405px;margin-right: -405px;">
+        <nav class="navbar navbar-expand-lg " style="background-color: currentcolor; ">
             <a class="navbar-brand" href="#" style="color: white;
-            font-size: 30px;">Irent  felipe</a>
+            font-size: 30px;">IRent</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Anuncios;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AnunciosController extends Controller
+class TipoAnuncioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class AnunciosController extends Controller
      */
     public function index()
     {
-        
-
-        return view('anuncios.anuncios');
+        //
     }
 
     /**
