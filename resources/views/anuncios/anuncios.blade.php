@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="card">
+    {{-- <div class="card">
         <img src="{{ url('img/casa.jpg') }}" alt="" style="height: 400px">
         <p style=" text-align: center;position: fixed;margin-top: 90px; margin-left: 200px; color: white;font-size: 32px;
                  font-weight: 500;font-style: oblique;">
@@ -19,5 +19,5 @@
 
     <div style="background: black">
 
-    </div>
+    </div> --}}
 @endsection

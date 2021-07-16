@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ URL::asset('css/navbar.css') }}">
+    
     <title>MarktPlace</title>
 
 </head>
@@ -17,43 +18,41 @@
 
 
 
-            <nav class="navbar navbar-default-lg ">
-                <a class="navbar-brand" href="#" style="color: white;
-            font-size: 30px;">IRent</a>
+            <nav class="navbar navbar-expand-lg ">
+                <a class="navbar-brand" href="#">iRent</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent"
-                    style="margin-left: 1200px;font-size: larger;">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent"
+                    style="">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#" style="color: white">Categoria <span
+                            <a class="nav-link" href="#">Imovéis para alugar <span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" style="color: white">quem somos</a>
+                            <a class="nav-link" href="#" >Imóveis para comprar</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown"
-                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" >Para proprietários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" >Indicar imóveis</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" >Sobre nós</a>
+                            <i class="fab fa-accessible-icon"></i>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <label for=""><a href="" style="color: white">Entrar ou Cadastrar</a></label>
+                        <label for="" style="    margin-right: 10px;">Ajuda</label>
+                        <label for=""><a href="" style="color: black;">Conta</a></label>
                         
                     </form>
-                </div> --}}
+                </div>
             </nav>
 
 
