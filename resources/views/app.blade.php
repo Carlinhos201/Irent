@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ URL::asset('css/navbar.css') }}">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <title>MarktPlace</title>
 
 </head>
@@ -46,10 +46,12 @@
                             <a class="nav-link" href="#" >Sobre nós</a>
                             <i class="fab fa-accessible-icon"></i>
                         </li>
+                        
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <label for="" style="    margin-right: 10px;">Ajuda</label>
-                        <label for=""><a href="" style="color: black;">Conta</a></label>
+                        <label for="" style="    margin-right: 10px;">Ajuda</label> 
+                      
+                        <label for=""><a href="" style="color: white; background: orangered; border-radius: 20px"><i class="bi bi-person-circle"></i> Conta</a></label>
                         
                     </form>
                 </div>
@@ -61,6 +63,7 @@
 
         </div>
     </header>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
 </body>
 
 </html>
