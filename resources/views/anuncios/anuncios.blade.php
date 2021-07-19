@@ -9,28 +9,33 @@
 
         <form action=""
             style="position: fixed;margin-top: 150px;margin-left: 250px;color: white;border: groove; background: grey; border-radius: 10px;">
-            <h3>Encontre o imóvel ideal para você!</h3>
-            <div class="form">
-            <div class="col-lg-12">
-                {{-- <label for=""><span>Busque sua Cidade</span></label> --}}
-                <input class="form-control" type="text" role="combobox" aria-haspopup="listbox"
-                    placeholder="Busque sua Cidade">
-            </div>
-            <div class="row">
-                <div class="">
+            <div class="form" style="background: white; padding: 30px 30px 30px 30px">
+                <h3 style="color: grey">Encontre o imóvel ideal para você!</h3>
 
-                    <input class="form-control" type="text" role="combobox" aria-haspopup="listbox"
-                        placeholder="Busque por Bairro">
-                </div>
-                <div class="">
+                <div class="col-lg-12">
+                    <div class="form-group" style="    font: -webkit-small-control;">
+                        <label for="" style="color: grey"><i class="bi bi-geo-alt"></i>Cidade</label>
+                        {{-- <label for=""><span>Busque sua Cidade</span></label> --}}
+                        <input class="form-control" type="text" role="combobox" aria-haspopup="listbox"
+                            placeholder="Busque sua Cidade">
+                    </div>
+               
+                <div class="row" style="font: -webkit-small-control;">
+                    <div class="">
 
-                    <input class="form-control" type="text" role="combobox" aria-haspopup="listbox"
-                        placeholder="Nº de Quartos">
+                        <input class="form-control" type="text"
+                            placeholder="Busque por Bairro">
+                    </div>
+                    <div class="">
+
+                        <input class="form-control" type="text"
+                            placeholder="Nº de Quartos">
+                    </div>
+
                 </div>
-                
             </div>
-            <button class="btn" style="color: white; background: orangered">Buscar</button>
-        </div>
+                <button class="btn" style="color: white; background: orangered">Buscar</button>
+            </div>
         </form>
 
     </div>
