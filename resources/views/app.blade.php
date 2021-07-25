@@ -32,7 +32,7 @@
                     
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Imovéis para alugar <span
+                            <a class="nav-link" href="#">Imovéis para  <span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
