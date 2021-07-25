@@ -17,7 +17,7 @@
 
 
 
-            <nav class="navbar navbar-expand-lg ">
+            <nav class="navbar navbar-expand-lg" style="margin-right: 140px; margin-left:140px">
                 <a class="navbar-brand" href="#">iRent</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -27,6 +27,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent"
                     style="">
+                    @auth
+                        
+                    
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Imovéis para alugar <span
@@ -60,11 +63,18 @@
                                     <a href="#" class="dropdown-item">Entrar</a>
                                     <a href="#" class="dropdown-item">Settings</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#"class="dropdown-item">Logout</a>
+                                    <a class="nav-link" href="#" onclick="event.preventDefault();
+                                    document.querySelector('form.logout').submit();" style="">
+                                       Sair
+                                   </a>
+                                   <form action="{{ url('logout') }}" class="logout" method="POST" style="display: none">
+                                    @csrf
+                                </form>
                                 </div>
                             </li>
                         </ul>
                     </form>
+                    @endauth
                 </div>
             </nav>
 

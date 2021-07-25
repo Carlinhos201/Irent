@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cidades;
 
 use App\Http\Controllers\Controller;
+use App\Model\Cidades;
 use Illuminate\Http\Request;
 
 class CidadesController extends Controller
@@ -14,7 +15,9 @@ class CidadesController extends Controller
      */
     public function index()
     {
-        //
+        $cidades = Cidades::all();
+
+        return $cidades;
     }
 
     /**

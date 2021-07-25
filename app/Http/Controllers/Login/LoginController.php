@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Anuncios;
+namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
-use App\Model\Cidades;
 use Illuminate\Http\Request;
 
-class AnunciosController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class AnunciosController extends Controller
      */
     public function index()
     {
-        $cidades = Cidades::all(['id', 'name']);
-
-        return view('anuncios.anuncios', compact('cidades'));
+        return view('login.login');
     }
 
     /**
