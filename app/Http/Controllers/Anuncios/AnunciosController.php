@@ -13,9 +13,15 @@ class AnunciosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cidades = Cidades::all(['id', 'name']);
+        $cidades = Cidades::join('estados', 'estados.id', '=', 'cidades.estado_id')
+                            ->select(
+                                'cidades.name',
+                                'estados.nome'
+                            )
+                            ->orderBy('name')
+                            ->get();
 
         return view('anuncios.anuncios', compact('cidades'));
     }

@@ -27,7 +27,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent"
                     style="">
-                    @auth
+                    {{-- @auth --}}
                         
                     
                     <ul class="navbar-nav mr-auto">
@@ -74,7 +74,7 @@
                             </li>
                         </ul>
                     </form>
-                    @endauth
+                    {{-- @endauth --}}
                 </div>
             </nav>
 

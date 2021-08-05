@@ -23,7 +23,7 @@
                                 
                                 <select name="cidades" id="" class="form-control">
                                     @foreach ( $cidades as $cidade )
-                                        <option value="{{$cidade->id}}">{{$cidade->name}}</option>
+                                        <option value="{{$cidade->id}}">{{$cidade->name}} - {{$cidade->nome}}</option>
                                     @endforeach
                                 </select>
                                 
