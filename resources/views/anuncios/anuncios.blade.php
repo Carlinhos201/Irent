@@ -3,8 +3,8 @@
 @section('content')
 
     <div class="card">
-        <img src="{{ url('img/ap.jpg') }}" alt="" style="height: 470px">
 
+        <img src="{{url('img/home-bg.jpg')}}" alt="">
 
         <div class="formulario">
             <form action="" style="position: absolute;color: white;border: groove; background: grey; border-radius: 10px;">
