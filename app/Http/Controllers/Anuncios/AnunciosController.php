@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Anuncios;
 
+use App\Http\Controllers\Cidades\CidadesController;
 use App\Http\Controllers\Controller;
 use App\Model\Cidades;
+use App\Model\Estados;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnunciosController extends Controller
 {
@@ -18,11 +21,11 @@ class AnunciosController extends Controller
         $cidades = Cidades::join('estados', 'estados.id', '=', 'cidades.estado_id')
                             ->select(
                                 'cidades.name',
-                                'estados.nome'
+                                'estados.sigla'
                             )
-                            ->orderBy('name')
+                            ->orderBy('name', 'asc')
                             ->get();
-
+          
         return view('anuncios.anuncios', compact('cidades'));
     }
 

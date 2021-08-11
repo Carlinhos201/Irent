@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/anuncios', [AnunciosController::class, 'index']);
 
+Route::get('pegarCidadesPorUf/{uf}', [CidadesController::class, 'pegarCidadesPorUf']);
 
 
 // Route::get('/home', function () {

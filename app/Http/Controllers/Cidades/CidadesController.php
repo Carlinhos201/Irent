@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cidades;
 use App\Http\Controllers\Controller;
 use App\Model\Cidades;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CidadesController extends Controller
 {
@@ -63,5 +64,15 @@ class CidadesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pegarCidadesPorUf($uf)
+    {
+        $cidades = DB::table('cidades')
+                    ->where('estado_id', '=', $uf)
+                    ->orderBy('name', 'asc')
+                    ->get();
+
+        return $cidades;            
     }
 }
