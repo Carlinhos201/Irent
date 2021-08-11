@@ -1,29 +1,49 @@
 @extends('app')
 <link rel="stylesheet" href="{{ URL::asset('css/anuncios.css') }}">
-@section('content')
 
+@section('content')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/1ab94d0eba.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ URL::asset('css/mobile-navbar.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/login.css') }}">
+    <link src="{{ URL::asset('js/ajax.js') }}">
+    <title>Eu Alugo | Login </title>
+
+</head>
     <div class="card">
-        
+
         <img src="{{ url('img/home-bg.jpg') }}" alt="">
 
         <div class="formulario">
-            <form action="" style="position: absolute;color: white;border: groove; background: grey; border-radius: 10px; background: white">
+            <form action=""
+                style="position: absolute;color: white;border: groove; background: grey; border-radius: 10px; background: white">
 
                 <div class="form" style="background: white; padding: 50px 60px 30px 60px">
                     <h3 style="color: grey; text-align: center;margin-bottom: 40px;">Encontre o imóvel ideal para você!</h3>
 
                     <div class="col-lg-12">
                         <div class="form-group" style="font: -webkit-small-control;">
-                            <label for="" style="color: grey"><i class="bi bi-geo-alt"></i> Cidade</label>
-
-
-                            <select name="cidades" id="" class="form-control">
-                                @foreach ($cidades as $cidade)
-                                    <option value="{{ $cidade->id }}">{{ $cidade->name }} - {{ $cidade->sigla }}
+                            {{-- <label for="" style="color: grey"><i class="bi bi-geo-alt"></i> Cidade</label> --}}
+                            <form action="" id="">
+                            <select name="cidades" id="estado" class="form-control">
+                                @foreach ($estados as $cidade)
+                                    <option value="{{ $cidade->id }}">{{ $cidade->sigla }}
                                     </option>
                                 @endforeach
                             </select>
-
+                            <select name="cidades" id="cidades" class="form-control">
+                                @foreach ($estados as $cidade)
+                                    <option value="{{ $cidade->id }}">{{ $cidade->sigla }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </form>
                         </div>
                     </div>
 
@@ -62,7 +82,7 @@
         <h3>Anúncios em destaques</h3>
     </div>
     <div>
-       
+
         {{-- <div class="row">
         <div class="card">
                 <img src="{{url('img/casa.jpg')}}" class="card-img-top" width="100%" height="100%">
@@ -70,8 +90,8 @@
                     <p class="card-text">Casa por temporada em Lagoa Santa - Goiás</p>
                 </div>
         </div>
-    </div> --}}
-    
+        </div> --}}
+
         <div class="row" style="margin-left: 100px; margin-top: 30px">
             <div class="card border-primary" style="width: 18rem;">
                 <img src="{{ url('img/teste1.jpeg') }}" class="card-img-top" alt="...">
@@ -117,8 +137,15 @@
                     <a href="#" class="btn" style=" background: orangered; color: white">Visitar</a>
                 </div>
             </div>
-           
-        </div>
-    </div>
 
+        </div>
+       
+    </div>
+    {{-- <script>
+        $.("#estado").change(function(event){
+    $.get("pegarCidadesPorUf/"+event.target.value+"", function(res){
+        console.log(res);
+    });
+});
+    </script> --}}
 @endsection

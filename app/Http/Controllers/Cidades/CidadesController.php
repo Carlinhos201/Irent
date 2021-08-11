@@ -66,13 +66,19 @@ class CidadesController extends Controller
         //
     }
 
-    public function pegarCidadesPorUf($uf)
+    public function pegarCidadesPorUf(Request $request, $uf)
     {
-        $cidades = DB::table('cidades')
-                    ->where('estado_id', '=', $uf)
-                    ->orderBy('name', 'asc')
-                    ->get();
+        // $cidades = DB::table('cidades')
+        //             ->where('estado_id', '=', $uf)
+        //             ->orderBy('name', 'asc')
+        //             ->get();
 
-        return $cidades;            
+        // return $cidades;      
+        
+        if($request->ajax())
+        {
+            $cidades = Cidades::cidade($uf);
+            return response()->json($cidades);
+        }
     }
 }

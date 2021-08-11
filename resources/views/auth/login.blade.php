@@ -2,49 +2,68 @@
 
 @section('content')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/1ab94d0eba.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ URL::asset('css/mobile-navbar.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/login.css') }}">
-    <title>Eu Alugo | Login </title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/1ab94d0eba.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ URL::asset('css/mobile-navbar.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('css/login.css') }}">
+        <title>Eu Alugo | Login </title>
 
-</head>
+    </head>
 
-<body>
-    
-<div class="background-img">
-        <img src="{{url('img/login-bg.jpg')}}" alt="" width="2200" height="1080">
-    </div>
+    <body>
 
-    <div class="fadeIn">
-    <main class="container">
-        <h2>Login</h2>
-        <form action="">
-            <div class="input-field">
-                <input type="text" name="usermail" id="usermail"
-                    placeholder="Digite seu email">
-                <div class="underline"></div>
-            </div>
-            <div class="input-field">
-                <input type="password" name="password" id="password"
-                    placeholder="Digite sua senha">
-                <div class="underline"></div>
-            </div>
+        <div class="background-img">
+            <img src="{{ url('img/login-bg.jpg') }}" alt="" width="2200" height="1080">
+        </div>
 
-            <input type="submit" value="Entrar">
-            <span>Ainda não tem uma conta? <a href="">Cadastre-se grátis</a></span>
-        </form>
-    </main>
-    </div>
-    
-    
+        <div class="fadeIn">
 
-    <script>
+            <main class="container">
+                <h2>Login</h2>
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
+                    <div class="input-field">
+                        <input type="text" name="email" id="email" placeholder="Digite seu email"
+                            class=" @error('email') is-invalid @enderror" value="{{ old('email') }}">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <div class="underline"></div>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" id="password" placeholder="Digite sua senha"
+                            class="@error('password') is-invalid  @enderror" value="{{ old('password') }}">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        <div class="underline"></div>
+                    </div>
+
+                    <button type="submit" value="">Entrar</button>
+                    @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Esqueceu a senha?') }}
+                                    </a>
+                                @endif
+                    <span>Ainda não tem uma conta? <a href="">Cadastre-se grátis</a></span>
+                </form>
+            </main>
+
+        </div>
+
+
+
+        <script>
             class MobileNavbar {
                 constructor(mobileMenu, navList, navLinks) {
                     this.mobileMenu = document.querySelector(mobileMenu);
@@ -57,9 +76,9 @@
 
                 animateLinks() {
                     this.navLinks.forEach((link) => {
-                        link.style.animation
-                        ? (link.style.animation = "")
-                        : (link.style.animation = 'navLinkFade 0.5s ease forwars 0.3s')
+                        link.style.animation ?
+                            (link.style.animation = "") :
+                            (link.style.animation = 'navLinkFade 0.5s ease forwars 0.3s')
                     });
                 }
 
@@ -88,6 +107,6 @@
             );
             mobileNavbar.init();
         </script>
-    
-</body>
+
+    </body>
 @endsection

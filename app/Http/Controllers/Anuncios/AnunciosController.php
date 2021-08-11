@@ -18,15 +18,19 @@ class AnunciosController extends Controller
      */
     public function index(Request $request)
     {
-        $cidades = Cidades::join('estados', 'estados.id', '=', 'cidades.estado_id')
-                            ->select(
-                                'cidades.name',
-                                'estados.sigla'
-                            )
-                            ->orderBy('name', 'asc')
-                            ->get();
+        // $cidades = Cidades::join('estados', 'estados.id', '=', 'cidades.estado_id')
+        //                     ->select(
+        //                         'cidades.name',
+        //                         'estados.sigla'
+        //                     )
+        //                     ->orderBy('name', 'asc')
+        //                     ->get();
+
+        $estados = DB::table('estados')
+                        ->orderBy('sigla', 'asc')
+                        ->get();
           
-        return view('anuncios.anuncios', compact('cidades'));
+        return view('anuncios.anuncios', compact('estados'));
     }
 
     /**

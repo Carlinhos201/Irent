@@ -18,17 +18,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('/')->group(function () {
         Route::get('/', [AnunciosController::class, 'index']);
         return view('anuncios.anuncios');
+    });
+    Route::get('pegarCidadesPorUf/{uf}', [CidadesController::class, 'pegarCidadesPorUf']);
 });
-// });
 
 // Route::get('/anuncios', [AnunciosController::class, 'index']);
 
-Route::get('pegarCidadesPorUf/{uf}', [CidadesController::class, 'pegarCidadesPorUf']);
+
 
 
 // Route::get('/home', function () {
@@ -39,4 +40,4 @@ Route::get('pegarCidadesPorUf/{uf}', [CidadesController::class, 'pegarCidadesPor
 // Route::get('/login', [LoginController::class, 'index']);
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
