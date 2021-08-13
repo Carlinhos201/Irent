@@ -80,5 +80,6 @@ class CidadesController extends Controller
             $cidades = Cidades::cidade($uf);
             return response()->json($cidades);
         }
+        return view('anuncios.anuncios');
     }
 }

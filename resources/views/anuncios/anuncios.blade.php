@@ -2,25 +2,17 @@
 <link rel="stylesheet" href="{{ URL::asset('css/anuncios.css') }}">
 
 @section('content')
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/1ab94d0eba.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ URL::asset('css/mobile-navbar.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/login.css') }}">
-    <link src="{{ URL::asset('js/ajax.js') }}">
-    <title>Eu Alugo | Login </title>
 
-</head>
+{{-- <body> --}}
+    
+
     <div class="card">
 
         <img src="{{ url('img/home-bg.jpg') }}" alt="">
 
         <div class="formulario">
+           
+        
             <form action=""
                 style="position: absolute;color: white;border: groove; background: grey; border-radius: 10px; background: white">
 
@@ -141,11 +133,8 @@
         </div>
        
     </div>
-    {{-- <script>
-        $.("#estado").change(function(event){
-    $.get("pegarCidadesPorUf/"+event.target.value+"", function(res){
-        console.log(res);
-    });
-});
-    </script> --}}
+
+    <script src="{{asset('js/app.js')}}"></script>
+{{-- </body> --}}
+
 @endsection

@@ -30,7 +30,9 @@ Route::group(['middleware' => ['auth']], function () {
 // Route::get('/anuncios', [AnunciosController::class, 'index']);
 
 
-
+Route::get('/oi', function () {
+    return view('welcome');
+});
 
 // Route::get('/home', function () {
 //     return view('home.home');
@@ -38,6 +40,14 @@ Route::group(['middleware' => ['auth']], function () {
 
 // Route::get('/cidades', [CidadesController::class, 'index']);
 // Route::get('/login', [LoginController::class, 'index']);
-Auth::routes();
+// Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
