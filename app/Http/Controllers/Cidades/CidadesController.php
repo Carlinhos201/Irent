@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cidades;
 
 use App\Http\Controllers\Controller;
 use App\Model\Cidades;
+use App\Model\Estados;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -68,18 +69,25 @@ class CidadesController extends Controller
 
     public function pegarCidadesPorUf(Request $request, $uf)
     {
-        // $cidades = DB::table('cidades')
-        //             ->where('estado_id', '=', $uf)
-        //             ->orderBy('name', 'asc')
-        //             ->get();
+        $cidades = DB::table('cidades')
+                    ->where('estado_id', '=', $request->nome)
+                    ->orderBy('name', 'asc')
+                    ->get();
 
-        // return $cidades;      
+        return $cidades;      
         
-        if($request->ajax())
-        {
-            $cidades = Cidades::cidade($uf);
-            return response()->json($cidades);
-        }
-        return view('anuncios.anuncios');
+       
+       
+    }
+
+    public function pegarEstados()
+    {
+        $estados = Estados::all();
+                   
+
+        return $estados;      
+        
+       
+       
     }
 }

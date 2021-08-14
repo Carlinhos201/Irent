@@ -14,9 +14,9 @@ class Cidades extends Model
         return $this->belongsTo(Estados::class);
     }
 
-    public static function cidade($uf)
-    {
-        return Cidades::where('estado_id', '=', $uf)
-        ->get();
-    } 
+    // public static function cidade($uf)
+    // {
+    //     return Cidades::where('estado_id', '=', $uf)
+    //     ->get();
+    // } 
 }

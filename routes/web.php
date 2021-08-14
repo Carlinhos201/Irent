@@ -24,9 +24,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [AnunciosController::class, 'index']);
         return view('anuncios.anuncios');
     });
-    Route::get('pegarCidadesPorUf/{uf}', [CidadesController::class, 'pegarCidadesPorUf']);
+    
+    
 });
-
+Route::get('estados', [CidadesController::class, 'pegarEstados']);
+Route::get('pegarCidadesPorUf/{uf}', [CidadesController::class, 'pegarCidadesPorUf']);
 // Route::get('/anuncios', [AnunciosController::class, 'index']);
 
 
