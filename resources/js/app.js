@@ -21,7 +21,8 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('login-component', require('./components/LoginComponent.vue').default);
-
+Vue.component('home-component', require('./components/Home.vue').default);
+Vue.component('cadastro-component', require('./components/CadastroAnuncio.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
