@@ -20,36 +20,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::prefix('/')->group(function () {
-        Route::get('/', [AnunciosController::class, 'index']);
+
+    Route::get('/', function () {
         return view('anuncios.anuncios');
     });
-    
-    
 });
-Route::get('estados', [CidadesController::class, 'pegarEstados']);
-Route::get('pegarCidadesPorUf/{uf}', [CidadesController::class, 'pegarCidadesPorUf']);
-// Route::get('/anuncios', [AnunciosController::class, 'index']);
+// Route::get('estados', [CidadesController::class, 'pegarEstados']);
+Route::get('cidades/', [CidadesController::class, 'index']);
 
+Route::get('criar-conta', function () {
+    return view('auth.register');
+});
 
 Route::get('/oi', function () {
     return view('welcome');
 });
 
-// Route::get('/home', function () {
-//     return view('home.home');
-// });
-
-// Route::get('/cidades', [CidadesController::class, 'index']);
-// Route::get('/login', [LoginController::class, 'index']);
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

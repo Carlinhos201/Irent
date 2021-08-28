@@ -2135,36 +2135,36 @@ __webpack_require__.r(__webpack_exports__);
     return {
       estados: [],
       cidades: [],
-      estadoSelecionado: {}
+      uf: null,
+      register: 'http://localhost:8000/criar-conta'
     };
   },
   created: function created() {
     this.getEstados();
+    this.getCidades();
   },
   methods: {
     getCidades: function getCidades() {
       var _this = this;
 
-      fetch("http://localhost:8000/pegarCidadesPorUf/".concat(this.estadoSelecionado.id)).then(function (response) {
+      fetch("http://localhost:8000/api/cidades/pegarCidadesPorUf/".concat(this.uf)).then(function (response) {
         return response.json();
       }).then(function (data) {
-        _this.cidades = data;
-      });
+        _this.cidades = data.uf;
+      }); // console.log(cidades)
     },
     getEstados: function getEstados() {
-      var _this2 = this;
+      // fetch(`http://localhost:8000/cidades/`).then(response => response.json()).then((data) => {
+      //     this.estados = data
+      // })
+      this.estados = Array = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'];
+    } // selecionarEstado(estados)
+    // {
+    //     console.log(estados);
+    //    estadoSelecionado = estados
+    //   this.getCidades(estados);
+    // }
 
-      fetch('http://localhost:8000/estados').then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        _this2.estados = data;
-      });
-    },
-    selecionarEstado: function selecionarEstado(estados) {
-      this.estadoSelecionado = estados;
-      this.getCidades();
-      console.log(estados);
-    }
   }
 });
 
@@ -38106,31 +38106,22 @@ var render = function() {
                       _c("form", { attrs: { action: "", id: "" } }, [
                         _c(
                           "select",
-                          {
-                            staticClass: "form-control",
-                            attrs: {
-                              name: "cidades",
-                              id: "estado",
-                              text:
-                                _vm.estadoSelecionado.nome || "Selecione Estado"
-                            }
-                          },
-                          _vm._l(_vm.estados, function(estados) {
+                          { staticClass: "form-control" },
+                          _vm._l(_vm.estados, function(uf) {
                             return _c(
                               "option",
                               {
-                                key: estados.id,
-                                attrs: { value: "" },
+                                key: uf,
                                 on: {
-                                  click: function($event) {
-                                    return _vm.selecionarEstado(estados)
+                                  change: function($event) {
+                                    return _vm.getCidades(uf)
                                   }
                                 }
                               },
                               [
                                 _vm._v(
                                   "\r\n                                        " +
-                                    _vm._s(estados.nome) +
+                                    _vm._s(_vm.estados) +
                                     "   \r\n                                    "
                                 )
                               ]
@@ -38146,21 +38137,40 @@ var render = function() {
                         _c(
                           "select",
                           {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.cidades,
+                                expression: "cidades"
+                              }
+                            ],
                             staticClass: "form-control",
-                            attrs: { name: "cidades", id: "cidades" }
+                            attrs: { name: "cidades", id: "cidades" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.cidades = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
                           },
                           _vm._l(_vm.cidades, function(cidades) {
-                            return _c(
-                              "option",
-                              { key: cidades.id, attrs: { value: "" } },
-                              [
-                                _vm._v(
-                                  "\r\n                                            " +
-                                    _vm._s(cidades.name) +
-                                    "\r\n                                    "
-                                )
-                              ]
-                            )
+                            return _c("option", { key: cidades.id }, [
+                              _vm._v(
+                                "\r\n                                            " +
+                                  _vm._s(cidades.nome) +
+                                  "\r\n                                    "
+                              )
+                            ])
                           }),
                           0
                         )
@@ -38173,17 +38183,46 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm._m(1)
+            _c(
+              "div",
+              { staticStyle: { "margin-top": "12px", "text-align": "center" } },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    staticStyle: {
+                      color: "white",
+                      background: "orangered",
+                      padding: "5px 60px 5px 60px"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                        Buscar\r\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticStyle: { margin: "inherit" } }, [
+                  _c("p", { staticStyle: { "text-align": "center" } }, [
+                    _c("a", { attrs: { href: _vm.register } }, [
+                      _vm._v("Proprietário anuncie seu imóvel já")
+                    ])
+                  ])
+                ])
+              ]
+            )
           ]
         )
       ])
     ]),
     _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _vm._m(2),
     _vm._v(" "),
-    _vm._m(3),
-    _vm._v(" "),
-    _vm._m(4)
+    _vm._m(3)
   ])
 }
 var staticRenderFns = [
@@ -38217,37 +38256,6 @@ var staticRenderFns = [
             staticClass: "form-control",
             attrs: { type: "text", placeholder: "Nº de Quartos" }
           })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticStyle: { "margin-top": "12px", "text-align": "center" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "btn",
-            staticStyle: {
-              color: "white",
-              background: "orangered",
-              padding: "5px 60px 5px 60px"
-            }
-          },
-          [_vm._v("\r\n                        Buscar\r\n                    ")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticStyle: { margin: "inherit" } }, [
-          _c("p", { staticStyle: { "text-align": "center" } }, [
-            _c("a", { attrs: { href: "" } }, [
-              _vm._v("Proprietário anuncie seu imóvel já")
-            ])
-          ])
         ])
       ]
     )
