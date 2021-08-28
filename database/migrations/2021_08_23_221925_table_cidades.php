@@ -13,15 +13,11 @@ class TableCidades extends Migration
      */
     public function up()
     {
-        Schema::create('cidades', function (Blueprint $table) {
-
-            $table->increments('id');
-            $table->integer('estado_id')->unsigned();
-            $table->foreign('estado_id')->references('id')->on('estados');
-            $table->string('name', 64);
+        Schema::create('cidade', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome');
+            $table->string('uf');
             $table->timestamps();
-            $table->softDeletes();
-
         });
     }
 
@@ -32,6 +28,6 @@ class TableCidades extends Migration
      */
     public function down()
     {
-        Schema::drop('cidades');
+        Schema::dropIfExists('cidade');
     }
 }

@@ -17,15 +17,15 @@
                         <div class="form-group" style="font: -webkit-small-control;">
                             
                             <form action="" id="">
-                            <select name="cidades" id="estado" class="form-control" :text="estadoSelecionado.nome || 'Selecione Estado'">
-                                   <option value="" v-for="estados in estados" :key="estados.id" @click="selecionarEstado(estados)">
-                                        {{estados.nome}}   
+                            <select  class="form-control"  >
+                                   <option  v-for="uf in estados" :key="uf" @change="getCidades(uf)">
+                                        {{estados}}   
                                     </option> 
                             </select>
                             {{estadoSelecionado}}
-                            <select name="cidades" id="cidades" class="form-control">
-                                    <option value="" v-for="cidades in cidades" :key="cidades.id">
-                                            {{cidades.name}}
+                            <select name="cidades" id="cidades" class="form-control" v-model="cidades">
+                                    <option  v-for="cidades in cidades" :key="cidades.id" >
+                                            {{cidades.nome}}
                                     </option>
                             </select>
                         </form>
@@ -49,7 +49,7 @@
                         Buscar
                     </button>
                     <div style="margin: inherit;">
-                        <p style="text-align: center"> <a href="">Proprietário anuncie seu imóvel já</a></p>
+                        <p style="text-align: center"> <a :href="register">Proprietário anuncie seu imóvel já</a></p>
                     </div>
 
                 </div>
@@ -129,33 +129,71 @@
         data () {
             return {
                 estados: [],
+                
                 cidades: [],
-                estadoSelecionado: {},
+                uf: null,
+                register: 'http://localhost:8000/criar-conta'
             };
         },
         created () {
             this.getEstados();
+            this.getCidades();
+            
         },
 
         methods: {
             getCidades()
             {
-                fetch(`http://localhost:8000/pegarCidadesPorUf/${this.estadoSelecionado.id}`).then(response => response.json()).then((data) => {
-                    this.cidades = data;
+               fetch(`http://localhost:8000/api/cidades/pegarCidadesPorUf/${this.uf}`).then(response => response.json()).then((data) => {
+                    this.cidades = data.uf
+                    
                 })
+                // console.log(cidades)
             },
 
             getEstados() {
-                fetch('http://localhost:8000/estados').then(response => response.json()).then((data) => {
-                    this.estados = data;
-                })
+                // fetch(`http://localhost:8000/cidades/`).then(response => response.json()).then((data) => {
+                //     this.estados = data
+                // })
+               
+                        this.estados = Array = [
+    'AC',
+    'AL',
+    'AM',
+    'AP',
+    'BA',
+    'CE',
+    'DF',
+    'ES',
+    'GO',
+    'MA',
+    'MG',
+    'MS',
+    'MT',
+    'PA',
+    'PB',
+    'PE',
+    'PI',
+    'PR',
+    'RJ',
+    'RN',
+    'RO',
+    'RR',
+    'RS',
+    'SC',
+    'SE',
+    'SP',
+    'TO',
+  ];
             },
-            selecionarEstado(estados)
-            {
-              this.estadoSelecionado = estados;
-              this.getCidades();
-                console.log(estados);
-            }
+     
+            // selecionarEstado(estados)
+            // {
+            //     console.log(estados);
+            //    estadoSelecionado = estados
+            //   this.getCidades(estados);
+                
+            // }
         }
     }
 </script>

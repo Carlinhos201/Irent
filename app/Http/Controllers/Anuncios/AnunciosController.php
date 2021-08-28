@@ -26,11 +26,11 @@ class AnunciosController extends Controller
         //                     ->orderBy('name', 'asc')
         //                     ->get();
 
-        $estados = DB::table('estados')
-                        ->orderBy('sigla', 'asc')
-                        ->get();
+        // $estados = DB::table('estados')
+        //                 ->orderBy('sigla', 'asc')
+        //                 ->get();
           
-        return view('anuncios.anuncios', compact('estados'));
+        return view('anuncios.anuncios');
     }
 
     /**

@@ -17,9 +17,9 @@ class CidadesController extends Controller
      */
     public function index()
     {
-        $cidades = Cidades::all();
+        return  Cidades::get(['uf']);
 
-        return $cidades;
+        
     }
 
     /**
@@ -67,27 +67,13 @@ class CidadesController extends Controller
         //
     }
 
-    public function pegarCidadesPorUf(Request $request, $uf)
+    public function pegarCidadesPorUf(string $uf)
     {
-        $cidades = DB::table('cidades')
-                    ->where('estado_id', '=', $request->nome)
-                    ->orderBy('name', 'asc')
-                    ->get();
-
-        return $cidades;      
+            return Cidades::where('uf', $uf)->get(['id', 'nome', 'uf']);
+    
         
        
        
     }
 
-    public function pegarEstados()
-    {
-        $estados = Estados::all();
-                   
-
-        return $estados;      
-        
-       
-       
-    }
 }
