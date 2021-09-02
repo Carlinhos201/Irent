@@ -64,7 +64,11 @@ class AutenticacaoController extends Controller
         ]);
 
     }
-
+    public function user(Request $request)
+    {
+        $user = $request->user();
+        return response()->json($user);
+    }
     /**
      * Store a newly created resource in storage.
      *
