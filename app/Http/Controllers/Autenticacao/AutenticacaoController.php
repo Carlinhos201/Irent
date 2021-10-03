@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AutenticacaoController extends Controller
 {
@@ -64,7 +65,23 @@ class AutenticacaoController extends Controller
         ]);
 
     }
+    public function register(Request $request){
 
+    }
+    public function logout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return $request;
+    }
+    public function user(Request $request)
+    {
+        $user = $request->user();
+        return response()->json($user);
+    }
     /**
      * Store a newly created resource in storage.
      *
