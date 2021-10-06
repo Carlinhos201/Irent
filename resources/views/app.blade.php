@@ -15,7 +15,7 @@
     <link src="{{ URL::asset('js/app.js') }}">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <title>Eu Alugo | Início</title>
+    
 
 </head>
 
@@ -35,8 +35,8 @@
             <ul class="nav-list">
                 <li><a href="/">Teste 1</a></li>
                 
-                <li><a href="/">Teste 2</a></li>
-                <li><a href="/">Teste 3</a></li>
+                <li><a href="/">Contato</a></li>
+                
                 <li>
                     <a href="login" onclick="event.preventDefault();
                     document.querySelector('form.logout').submit();">Entrar</a>
@@ -47,6 +47,8 @@
                 {{-- <li class="nav-item">
                     <span style="color: white" class="nav-link">{{auth()->user()->nome}}</span>
                 </li> --}}
+
+                <li><a href="CadastroAnuncio.vue">Criar Conta</a></li>
             </ul>
 
         </nav>
