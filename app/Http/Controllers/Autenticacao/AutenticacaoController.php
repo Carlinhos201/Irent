@@ -7,6 +7,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AutenticacaoController extends Controller
 {
@@ -66,7 +67,16 @@ class AutenticacaoController extends Controller
 
     }
     public function register(Request $request){
-
+       
+            DB::transaction(function () use ($request) {
+                $user = User::create(
+                    [
+                        'name'    => $request['name'],
+                        'email'      => $request['email'],
+                        'password'   =>  bcrypt($request['password']),
+                    ]);
+            });
+        
     }
     public function logout(Request $request){
         Auth::logout();

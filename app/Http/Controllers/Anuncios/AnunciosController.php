@@ -7,7 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Model\Anuncios;
 use App\Model\Cidades;
 use App\Model\Estados;
+use App\Model\Imagens;
+use  Response;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\DB;
 
 class AnunciosController extends Controller
@@ -19,7 +22,7 @@ class AnunciosController extends Controller
      */
     public function index(Request $request)
     {
-     return Anuncios::all();
+        return Anuncios::all();
     }
 
     /**
@@ -30,26 +33,47 @@ class AnunciosController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $request->user()->user_id;
-        // $user_id = $user->user_id;
 
-        DB::transaction(function () use ($request){
-            $anuncio = new Anuncios();
-            $anuncio->user_id       = $request->user_id;
-            $anuncio->titulo        = $request->titulo;
-            $anuncio->descricao     = $request->descricao;
-            $anuncio->quartos       = $request->quartos;
-            $anuncio->proprietario  = $request->proprietario;
-            $anuncio->bairro        = $request->bairro;
-            $anuncio->logradouro    = $request->logradouro;
-            $anuncio->numero        = $request->numero;
-            $anuncio->cep           = $request->cep;
-            $anuncio->tipo          = $request->tipo;
-            // $anuncio->valor         = null;
-            $anuncio->save();
+
+        $user = $request->user()->user_id;
+        $file = $request['imagem'];
+        $request = json_decode($request->data, true);
+        $anuncio = null;
+
+        DB::transaction(function () use ($request, $anuncio, $file) {
+                    $anuncio = Anuncios::create([
+                        'user_id' => $request['user_id'],
+                        'titulo'  => $request['titulo'],
+                        'proprietario'  => $request['proprietario'],
+                        'bairro'  => $request['bairro'],
+                        'logradouro'  => $request['logradouro']
+                    ]);
+
+                if($request['imagem']){
+                    foreach ($request['imagem'] as $key => $imagem) {
+                        if ($file && $file->isValid()) {
+                                $md5 = md5_file($file);
+                                $caminho = 'imagens/';
+                                $nome = $md5 . '.' . $file->extension();
+                                $upload = $file->storeAs($caminho, $nome);
+                                $nomeOriginal = $file->getClientOriginalName();
+                                if ($upload) {
+                                         Imagens::create([
+                                            'anuncio_id'   => $anuncio->id,
+                                            'caminho'      => $caminho . '/' . $nome,
+                                            'nome'         => $nomeOriginal,
+                                        ]);
+                                  
+                                }
+                            }
+                        
+                    }
+                }
+                
+            // });
+
         });
     }
-
     /**
      * Display the specified resource.
      *

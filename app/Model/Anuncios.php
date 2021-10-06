@@ -13,4 +13,8 @@ class Anuncios extends Model
     {
         return $this->hasOne(User::class);
     }
+    public function imagem()
+    {
+        return $this->hasMany(Imagens::class);
+    }
 }
