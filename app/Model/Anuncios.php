@@ -15,6 +15,6 @@ class Anuncios extends Model
     }
     public function imagem()
     {
-        return $this->hasMany(Imagens::class);
+        return $this->belongsTo(Imagens::class);
     }
 }

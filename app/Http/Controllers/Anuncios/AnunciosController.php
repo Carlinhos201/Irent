@@ -8,10 +8,12 @@ use App\Model\Anuncios;
 use App\Model\Cidades;
 use App\Model\Estados;
 use App\Model\Imagens;
+use Illuminate\Database\Eloquent\Builder;
 use  Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AnunciosController extends Controller
 {
@@ -22,7 +24,9 @@ class AnunciosController extends Controller
      */
     public function index(Request $request)
     {
-        return Anuncios::all();
+        // $empresa_id = $user->pessoa->profissional->empresa_id;
+        return Anuncios::with('imagem')
+         ->get();
     }
 
     /**
@@ -33,15 +37,11 @@ class AnunciosController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $user = $request->user()->user_id;
-        $file = $request['imagem'];
-        $request = json_decode($request->data, true);
         $anuncio = null;
 
-        DB::transaction(function () use ($request, $anuncio, $file) {
-                    $anuncio = Anuncios::create([
+        DB::transaction(function () use ($request, $anuncio, $user) {
+            $anuncio =  Anuncios::create([
                         'user_id' => $request['user_id'],
                         'titulo'  => $request['titulo'],
                         'proprietario'  => $request['proprietario'],
@@ -49,28 +49,20 @@ class AnunciosController extends Controller
                         'logradouro'  => $request['logradouro']
                     ]);
 
-                if($request['imagem']){
-                    foreach ($request['imagem'] as $key => $imagem) {
-                        if ($file && $file->isValid()) {
-                                $md5 = md5_file($file);
-                                $caminho = 'imagens/';
-                                $nome = $md5 . '.' . $file->extension();
-                                $upload = $file->storeAs($caminho, $nome);
-                                $nomeOriginal = $file->getClientOriginalName();
-                                if ($upload) {
-                                         Imagens::create([
-                                            'anuncio_id'   => $anuncio->id,
-                                            'caminho'      => $caminho . '/' . $nome,
-                                            'nome'         => $nomeOriginal,
-                                        ]);
-                                  
-                                }
-                            }
-                        
+                    if ($request['imagem']) {
+                        foreach ($request['imagem'] as $imagem) {
+                            $md5 = md5_file($imagem['imagem']['file']);
+                            $caminho = 'imagens/';
+                            $nome = $md5 . '.' . explode(';', explode('/',$imagem['imagem']['file'])[1])[0];
+                            $file = explode(',', $imagem['imagem']['file'])[1];
+                            Storage::put($caminho . $nome, base64_decode($file));
+                            Imagens::create([
+                                'anuncio_id' => $anuncio->id,
+                                'caminho' => $caminho . '/' . $nome,
+                                'nome'  => $imagem['imagem']['name'],
+                            ]);
+                        }
                     }
-                }
-                
-            // });
 
         });
     }
