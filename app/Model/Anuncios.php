@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Anuncios extends Model
 {
     protected $guarded = [];
+    protected $table = "anuncios";
 
     public function users()
     {

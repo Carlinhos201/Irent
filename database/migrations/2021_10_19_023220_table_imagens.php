@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TableCidades extends Migration
+class TableImagens extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class TableCidades extends Migration
      */
     public function up()
     {
-        Schema::create('cidade', function (Blueprint $table) {
+        Schema::create('imagens', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('anuncio_id');
+            $table->foreign('anuncio_id')->references('id')->on('anuncios')->onDelete('cascade');
             $table->string('nome');
-            $table->string('uf');
+            $table->string('caminho');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class TableCidades extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cidade');
+        Schema::dropIfExists('imagens');
     }
 }

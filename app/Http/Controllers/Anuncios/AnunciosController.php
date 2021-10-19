@@ -1,17 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Anuncios;
-
-use App\Http\Controllers\Cidades\CidadesController;
 use App\Http\Controllers\Controller;
 use App\Model\Anuncios;
-use App\Model\Cidades;
-use App\Model\Estados;
 use App\Model\Imagens;
-use Illuminate\Database\Eloquent\Builder;
-use  Response;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,7 +18,7 @@ class AnunciosController extends Controller
     public function index(Request $request)
     {
         // $empresa_id = $user->pessoa->profissional->empresa_id;
-        return Anuncios::with('imagem')
+        return Anuncios::with('imagem:id, caminho')
          ->get();
     }
 
@@ -42,11 +35,27 @@ class AnunciosController extends Controller
 
         DB::transaction(function () use ($request, $anuncio, $user) {
             $anuncio =  Anuncios::create([
-                        'user_id' => $request['user_id'],
-                        'titulo'  => $request['titulo'],
+                        'user_id'       => $request['user_id'],
                         'proprietario'  => $request['proprietario'],
-                        'bairro'  => $request['bairro'],
-                        'logradouro'  => $request['logradouro']
+                        'email'         => $request['email'],
+                        'data_nasc'     => $request['data_nasc'],
+                        'cpf'           => $request['cpf'],
+                        'telefone'      => $request['telefone'],
+                        'celular'       => $request['celular'],
+                        'titulo'        => $request['titulo'],
+                        'qtd_quartos'   => $request['qtd_quartos'],
+                        'qtd_banh'      => $request['qtd_banh'],
+                        'qtd_suites'    => $request['qtd_suites'],
+                        'qtd_garag'     => $request['qtd_garag'],
+                        'numero_andar'  => $request['numero_andar'],
+                        'tipo'          => $request['tipo'],
+                        'descricao'     => $request['descricao'],
+                        'cep'           => $request['cep'],
+                        'numero_imovel' => $request['numero_imovel'],
+                        'cidade_id'     => $request['cidade_id'],
+                        'bairro'        => $request['bairro'],
+                        'logradouro'    => $request['logradouro'],
+                        'ativo'         => 1
                     ]);
 
                     if ($request['imagem']) {

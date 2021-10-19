@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriaAnunciosTable extends Migration
+class TableCidades extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateCategoriaAnunciosTable extends Migration
      */
     public function up()
     {
-        Schema::create('categoria_anuncio', function (Blueprint $table) {
+        Schema::create('cidades', function (Blueprint $table) {
             $table->id();
-            $table->string('nomeCategoria');
+            $table->string('nome');
+            $table->string('uf');
+            $table->string('longitude');
+            $table->string('latitude');
+            $table->boolean('ativo')->default(true);
+            $table->timestamps();
         });
     }
 
@@ -26,6 +31,6 @@ class CreateCategoriaAnunciosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categoria_anuncio');
+        Schema::dropIfExists('cidades');
     }
 }
