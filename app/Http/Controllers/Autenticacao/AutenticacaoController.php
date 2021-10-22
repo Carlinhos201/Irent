@@ -73,6 +73,7 @@ class AutenticacaoController extends Controller
                     [
                         'name'    => $request['name'],
                         'email'      => $request['email'],
+                        'celular'    => $request['celular'],
                         'password'   =>  bcrypt($request['password']),
                     ]);
             });
