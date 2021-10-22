@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsCidadeAnuncio extends Migration
+class AddColumnsCidadesAnuncio extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,10 @@ class AddColumnsCidadeAnuncio extends Migration
     public function up()
     {
         Schema::table('anuncios', function (Blueprint $table) {
-            $table->unsignedBigInteger('cidade_id');
-            $table->foreign('cidade_id')->references('id')->on('anuncios')->onDelete('cascade');
+            Schema::table('anuncios', function (Blueprint $table) {
+                $table->unsignedBigInteger('cidade_id');
+                $table->foreign('cidade_id')->references('id')->on('cidades')->onDelete('cascade');
+            });
         });
     }
 

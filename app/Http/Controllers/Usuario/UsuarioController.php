@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -12,9 +13,11 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function minhaConta(Request $request)
     {
-        //
+        $usuario = $request->user();
+
+        return User::with(['anuncio'])->find($usuario->id);
     }
 
     /**
@@ -34,9 +37,9 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $usuario)
     {
-        //
+        return $usuario;
     }
 
     /**

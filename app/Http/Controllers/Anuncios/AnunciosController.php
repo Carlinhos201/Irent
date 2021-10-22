@@ -18,8 +18,7 @@ class AnunciosController extends Controller
     public function index(Request $request)
     {
         // $empresa_id = $user->pessoa->profissional->empresa_id;
-        return Anuncios::with('imagem:id, caminho')
-         ->get();
+        return Anuncios::all();
     }
 
     /**
@@ -43,6 +42,7 @@ class AnunciosController extends Controller
                         'telefone'      => $request['telefone'],
                         'celular'       => $request['celular'],
                         'titulo'        => $request['titulo'],
+                        'valor'         => $request['valor'],
                         'qtd_quartos'   => $request['qtd_quartos'],
                         'qtd_banh'      => $request['qtd_banh'],
                         'qtd_suites'    => $request['qtd_suites'],
@@ -51,7 +51,7 @@ class AnunciosController extends Controller
                         'tipo'          => $request['tipo'],
                         'descricao'     => $request['descricao'],
                         'cep'           => $request['cep'],
-                        'numero_imovel' => $request['numero_imovel'],
+                        'numero'        => $request['numero'],
                         'cidade_id'     => $request['cidade_id'],
                         'bairro'        => $request['bairro'],
                         'logradouro'    => $request['logradouro'],
@@ -81,9 +81,10 @@ class AnunciosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Anuncios $anuncio)
     {
-        //
+        $anuncio->cidade;
+        return $anuncio;
     }
 
     /**

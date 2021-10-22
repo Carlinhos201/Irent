@@ -12,10 +12,14 @@ class Anuncios extends Model
 
     public function users()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
     public function imagem()
     {
         return $this->belongsTo(Imagens::class);
+    }
+    public function cidade()
+    {
+        return $this->belongsTo(Cidades::class);
     }
 }

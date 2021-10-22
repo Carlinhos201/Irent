@@ -9,4 +9,9 @@ class Cidades extends Model
 
     protected $guarded = [];
 
+    public function anuncio()
+    {
+        return $this->hasMany(Anuncios::class);
+    }
+
 }

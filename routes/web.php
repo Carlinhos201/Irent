@@ -18,23 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => ['auth']], function () {
 
 
-    Route::get('/', function () {
-        return view('anuncios.anuncios');
-    });
-});
-// Route::get('estados', [CidadesController::class, 'pegarEstados']);
-Route::get('cidades/', [CidadesController::class, 'index']);
-
-Route::get('criar-conta', function () {
-    return view('auth.register');
-});
-
-Route::get('/oi', function () {
-    return view('welcome');
-});
-
-
-Auth::routes();
+// Auth::routes();
