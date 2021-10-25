@@ -1,0 +1,17 @@
+.navbar{
+    /* border-radius: 40px; */
+    background-color: white;
+    
+}
+
+.navbar-brand {
+    color: orangered;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.navbar .nav-link{
+    color: black;
+}
+
+

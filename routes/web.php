@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Anuncios\AnunciosController;
+use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Cidades\CidadesController;
+use App\Http\Controllers\Login\LoginController as LoginLoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,15 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::get('/anuncios', [AnunciosController::class, 'index']);
-
-Route::prefix('anuncios')->group(function () {
-        Route::get('/', [AnunciosController::class, 'index']);
-});
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
