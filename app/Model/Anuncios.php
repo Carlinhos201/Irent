@@ -16,7 +16,7 @@ class Anuncios extends Model
     }
     public function imagem()
     {
-        return $this->belongsTo(Imagens::class);
+        return $this->belongsTo(Imagens::class)->where('anuncio_id');
     }
     public function cidade()
     {

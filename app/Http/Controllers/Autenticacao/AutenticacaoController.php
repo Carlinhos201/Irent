@@ -122,9 +122,18 @@ class AutenticacaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        // $user = $request->user();
+        DB::transaction(function () use ($request, $user) {
+            $user->update(
+                [
+                    'name'    => $request['name'],
+                    'email'      => $request['email'],
+                    'celular'    => $request['celular'],
+                    'password'   =>  bcrypt($request['password']),
+                ]);
+        });
     }
 
     /**
