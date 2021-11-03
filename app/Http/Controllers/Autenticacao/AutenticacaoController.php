@@ -119,7 +119,7 @@ class AutenticacaoController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // $user = $request->user();
+        $user = $request->user();
         DB::transaction(function () use ($request, $user) {
             $user->update(
                 [

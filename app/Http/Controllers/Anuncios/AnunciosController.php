@@ -16,10 +16,9 @@ class AnunciosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        return Anuncios::all();
+    return Anuncios::with('imagens')->get();
     }
 
     /**
@@ -61,14 +60,17 @@ class AnunciosController extends Controller
 
                     if ($request['imagem']) {
                         foreach ($request['imagem'] as $imagem) {
-                            $md5 = md5_file($imagem['imagem']);
-                            $caminho = 'imagens/';
-                            $nome = $md5 . '.' . explode(';', explode('/',$imagem['imagem'])[1])[0];
+                            
+                            $caminho = 'imagens';
+                            // $imagem= file_get_contents($imagem['imagem'])[1];
                             $file = explode(',', $imagem['imagem'])[1];
-                            Storage::put($caminho . $nome, base64_decode($file));
+                            $md5 = base64_encode(file_get_contents($imagem['imagem']));
+                            // $nome =  $md5;
+                            Storage::put($caminho, base64_encode($file));
                             Imagens::create([
                                 'anuncio_id' => $anuncio->id,
-                                'caminho' => $caminho . '/' . $nome,
+                                'caminho' =>$caminho,
+                                'url'     => $md5,
                                 'nome'  => $imagem['nome'],
                             ]);
                         }

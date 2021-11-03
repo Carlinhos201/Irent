@@ -14,9 +14,9 @@ class Anuncios extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function imagem()
+    public function imagens()
     {
-        return $this->belongsTo(Imagens::class)->where('anuncio_id');
+        return $this->hasMany(Imagens::class, 'anuncio_id');
     }
     public function cidade()
     {

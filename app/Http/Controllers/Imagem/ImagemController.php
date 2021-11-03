@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Imagem;
 use App\Http\Controllers\Controller;
 use App\Model\Imagens;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImagemController extends Controller
 {
@@ -13,9 +14,10 @@ class ImagemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Imagens $imagem)
     {
-        return Imagens::all();
+        $imagem = Imagens::get('caminho');
+        return base64_decode($imagem);
     }
 
     /**
