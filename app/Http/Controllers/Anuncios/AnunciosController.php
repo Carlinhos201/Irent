@@ -113,13 +113,16 @@ class AnunciosController extends Controller
 
     public function get_image($path){
         $imagem=Imagens::find($path);
-        // if (Storage::disk('local')->exists($imagem->caminho)) {
             $path_image =  Storage::disk('public')->get($imagem->caminho);
-            // Log::info(explode(',', $path_image)[1]);
-            // return base64_decode(explode(',', $path_image)[1]);
             return $path_image;
-        // } else {
-        //     return null;
-        // }
+    }
+
+    public function getAnunciosByUserId(Request $request)
+    {
+        $user = $request->user();
+        $prop = $user->id;
+        return Anuncios::with('imagens')
+        ->where('user_id', $prop)
+        ->get();
     }
 }
