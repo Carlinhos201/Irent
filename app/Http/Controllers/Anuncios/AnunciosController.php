@@ -7,6 +7,7 @@ use App\Model\Imagens;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class AnunciosController extends Controller
@@ -60,17 +61,14 @@ class AnunciosController extends Controller
 
                     if ($request['imagem']) {
                         foreach ($request['imagem'] as $imagem) {
-                            
-                            $caminho = 'imagens';
-                            // $imagem= file_get_contents($imagem['imagem'])[1];
+                            $md5 = md5_file($imagem['imagem']);
+                            $caminho = 'imagens/';
+                            $nome = $md5 . '.' . explode(';', explode('/', $imagem['imagem'])[1])[0];
                             $file = explode(',', $imagem['imagem'])[1];
-                            $md5 = base64_encode(file_get_contents($imagem['imagem']));
-                            // $nome =  $md5;
-                            Storage::put($caminho, base64_encode($file));
+                            Storage::put($caminho . $nome, base64_decode($file));
                             Imagens::create([
                                 'anuncio_id' => $anuncio->id,
-                                'caminho' =>$caminho,
-                                'url'     => $md5,
+                                'caminho' =>$caminho . $nome,
                                 'nome'  => $imagem['nome'],
                             ]);
                         }
@@ -111,5 +109,17 @@ class AnunciosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function get_image($path){
+        $imagem=Imagens::find($path);
+        // if (Storage::disk('local')->exists($imagem->caminho)) {
+            $path_image =  Storage::disk('public')->get($imagem->caminho);
+            // Log::info(explode(',', $path_image)[1]);
+            // return base64_decode(explode(',', $path_image)[1]);
+            return $path_image;
+        // } else {
+        //     return null;
+        // }
     }
 }
