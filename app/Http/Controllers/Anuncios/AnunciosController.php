@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Anuncios;
 use App\Http\Controllers\Controller;
 use App\Model\Anuncios;
 use App\Model\Imagens;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class AnunciosController extends Controller
@@ -15,10 +17,9 @@ class AnunciosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        // $empresa_id = $user->pessoa->profissional->empresa_id;
-        return Anuncios::all();
+    return Anuncios::with('imagens')->get();
     }
 
     /**
@@ -60,15 +61,15 @@ class AnunciosController extends Controller
 
                     if ($request['imagem']) {
                         foreach ($request['imagem'] as $imagem) {
-                            $md5 = md5_file($imagem['imagem']['file']);
+                            $md5 = md5_file($imagem['imagem']);
                             $caminho = 'imagens/';
-                            $nome = $md5 . '.' . explode(';', explode('/',$imagem['imagem']['file'])[1])[0];
-                            $file = explode(',', $imagem['imagem']['file'])[1];
+                            $nome = $md5 . '.' . explode(';', explode('/', $imagem['imagem'])[1])[0];
+                            $file = explode(',', $imagem['imagem'])[1];
                             Storage::put($caminho . $nome, base64_decode($file));
                             Imagens::create([
                                 'anuncio_id' => $anuncio->id,
-                                'caminho' => $caminho . '/' . $nome,
-                                'nome'  => $imagem['imagem']['name'],
+                                'caminho' =>$caminho . $nome,
+                                'nome'  => $imagem['nome'],
                             ]);
                         }
                     }
@@ -108,5 +109,20 @@ class AnunciosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function get_image($path){
+        $imagem=Imagens::find($path);
+            $path_image =  Storage::disk('public')->get($imagem->caminho);
+            return $path_image;
+    }
+
+    public function getAnunciosByUserId(Request $request)
+    {
+        $user = $request->user();
+        $prop = $user->id;
+        return Anuncios::with('imagens')
+        ->where('user_id', $prop)
+        ->get();
     }
 }

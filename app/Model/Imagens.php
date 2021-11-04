@@ -8,19 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Imagens extends Model
 {
-    use Uuid;
-    protected $guarded = [];
-    // protected $table = 'imagens';
-    // protected $fillable = [
-    //     'anuncio_id',
-    //     'nome',
-    //     'caminho',
-    //     'created_at',
-    //     'updated_at',
-    //     'deleted_at'
-    // ];
 
-    // public $incrementing = false;
+    
+    protected $keyType = 'string';
+    protected $guarded = [];
 
     public function anuncio()
     {
