@@ -70,7 +70,8 @@ class AnunciosController extends Controller
                                 'anuncio_id' => $anuncio->id,
                                 'caminho' =>$caminho . $nome,
                                 'nome'  => $imagem['nome'],
-                            ]);
+                                'url'   => ''
+                             ]);
                         }
                     }
 
