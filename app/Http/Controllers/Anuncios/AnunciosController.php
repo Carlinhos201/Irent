@@ -19,7 +19,7 @@ class AnunciosController extends Controller
      */
     public function index()
     {
-    return Anuncios::with('imagens')->get();
+    return Anuncios::with(['imagens', 'cidade'])->get();
     }
 
     /**
@@ -85,6 +85,7 @@ class AnunciosController extends Controller
     public function show(Anuncios $anuncio)
     {
         $anuncio->cidade;
+        $anuncio->imagens;
         return $anuncio;
     }
 
