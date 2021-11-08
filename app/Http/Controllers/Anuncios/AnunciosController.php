@@ -19,7 +19,7 @@ class AnunciosController extends Controller
      */
     public function index()
     {
-    return Anuncios::with('imagens')->get();
+    return Anuncios::with(['imagens', 'cidade'])->get();
     }
 
     /**
@@ -70,7 +70,8 @@ class AnunciosController extends Controller
                                 'anuncio_id' => $anuncio->id,
                                 'caminho' =>$caminho . $nome,
                                 'nome'  => $imagem['nome'],
-                            ]);
+                                'url'   => ''
+                             ]);
                         }
                     }
 
@@ -85,6 +86,7 @@ class AnunciosController extends Controller
     public function show(Anuncios $anuncio)
     {
         $anuncio->cidade;
+        $anuncio->imagens;
         return $anuncio;
     }
 
