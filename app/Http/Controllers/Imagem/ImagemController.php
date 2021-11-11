@@ -60,8 +60,9 @@ class ImagemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Imagens $imagem)
     {
-        //
+        $imagem->ativo = false;
+        $imagem->save();
     }
 }

@@ -16,7 +16,7 @@ class Anuncios extends Model
     }
     public function imagens()
     {
-        return $this->hasMany(Imagens::class, 'anuncio_id');
+        return $this->hasMany(Imagens::class, 'anuncio_id')->where('ativo', true);
     }
     public function cidade()
     {
