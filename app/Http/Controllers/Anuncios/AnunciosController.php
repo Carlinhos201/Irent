@@ -19,7 +19,9 @@ class AnunciosController extends Controller
      */
     public function index()
     {
-    return Anuncios::with(['imagens', 'cidade'])->get();
+    return Anuncios::with(['imagens', 'cidade'])
+    ->where('ativo', 1)
+    ->get();
     }
 
     /**
@@ -97,9 +99,64 @@ class AnunciosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Anuncios $anuncio)
     {
-        //
+        DB::transaction(function () use ($request, $anuncio) {
+            $anuncio->update(
+                [
+                        'id' => $request['id'],
+                        'user_id'       => $request['user_id'],
+                        'proprietario'  => $request['proprietario'],
+                        'email'         => $request['email'],
+                        'data_nasc'     => $request['data_nasc'],
+                        'cpf'           => $request['cpf'],
+                        'telefone'      => $request['telefone'],
+                        'celular'       => $request['celular'],
+                        'titulo'        => $request['titulo'],
+                        'valor'         => $request['valor'],
+                        'qtd_quartos'   => $request['qtd_quartos'],
+                        'qtd_banh'      => $request['qtd_banh'],
+                        'qtd_suites'    => $request['qtd_suites'],
+                        'qtd_garag'     => $request['qtd_garag'],
+                        'numero_andar'  => $request['numero_andar'],
+                        'tipo'          => $request['tipo'],
+                        'descricao'     => $request['descricao'],
+                        'cep'           => $request['cep'],
+                        'numero'        => $request['numero'],
+                        'cidade_id'     => $request['cidade_id'],
+                        'bairro'        => $request['bairro'],
+                        'logradouro'    => $request['logradouro'],
+                        'ativo'         => 1
+                ]);
+           
+            
+                if ($request['imagem']) {
+                    $ids = [];
+                    foreach ($request['imagem'] as $imagem) {
+                        array_push($ids, $imagem['id']);
+                        if (!$imagem['id']) {
+                            $md5 = md5_file($imagem['imagem']);
+                            $caminho = 'imagens/';
+                            $nome = $md5 . '.' . explode(';', explode('/', $imagem['imagem'])[1])[0];
+                            $file = explode(',', $imagem['imagem'])[1];
+                            Storage::put($caminho . $nome, base64_decode($file));
+                            Imagens::create([
+                                'anuncio_id' => $anuncio->id,
+                                'caminho' =>$caminho . $nome,
+                                'nome'  => $imagem['nome'],
+                             ]);
+                        }
+                    }
+                }
+                $imagens = Imagens::where('anuncio_id', $anuncio->id)
+                    ->whereNotIn('id', $ids)
+                    ->get();
+
+                foreach ($imagens as $key => $imagem) {
+                    $imagem->delete();
+                }
+            
+        });
     }
 
     /**
@@ -123,7 +180,7 @@ class AnunciosController extends Controller
     {
         $user = $request->user();
         $prop = $user->id;
-        return Anuncios::with('imagens')
+        return Anuncios::with(['imagens', 'cidade'])
         ->where('user_id', $prop)
         ->get();
     }
